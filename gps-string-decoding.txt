@@ -1,0 +1,45 @@
+$GPVTG,156.6,T,,M,000.0,N,000.0,K,A*09
+
+Where:
+     GGA          Global Positioning System Fix Data
+     022249.563   Fix taken at 12:35:19 UTC
+     3942.0517,N  Latitude 48 deg 07.038' N
+     10447.2799,W Longitude 11 deg 31.000' E
+     1            Fix quality: 0 = invalid
+                               1 = GPS fix (SPS)
+                               2 = DGPS fix
+                               3 = PPS fix
+			       4 = Real Time Kinematic
+			       5 = Float RTK
+                               6 = estimated (dead reckoning) (2.3 feature)
+			       7 = Manual input mode
+			       8 = Simulation mode
+     05           Number of satellites being tracked
+     1.8          Horizontal dilution of position
+     1710.9,M     Altitude, Meters, above mean sea level
+     46.9,M       Height of geoid (mean sea level) above WGS84
+                      ellipsoid
+     (empty field) time in seconds since last DGPS update
+     (empty field) DGPS station ID number
+     *47          the checksum data, always begins with *
+$GPGGA,022249.563,3942.0517,N,10447.2799,W,1,05,1.8,1710.9,M,-14.7,M,,0000*50
+
+$GPGSA,A,3,32,14,31,10,22,,,,,,,,3.2,1.8,2.7*38
+
+Where:
+      GSV          Satellites in view
+      3            Number of sentences for full data
+      1            sentence 1 of 2
+      12           Number of satellites in view
+
+      14           Satellite PRN number
+      73           Elevation, degrees
+      351          Azimuth, degrees
+      25           SNR - higher is better
+           for up to 4 satellites per sentence
+      *75          the checksum data, always begins with *
+$GPGSV,3,1,12,14,73,351,25,31,62,173,21,32,57,045,23,18,47,265,26*75
+$GPGSV,3,2,12,10,38,117,20,01,36,301,23,22,29,307,25,11,26,275,*7F
+$GPGSV,3,3,12,25,20,083,14,20,11,126,,12,09,043,,03,08,306,20*77
+
+$GPRMC,022249.563,A,3942.0517,N,10447.2799,W,000.0,156.6,050918,,,A*7E
