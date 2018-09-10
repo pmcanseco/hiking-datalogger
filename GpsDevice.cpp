@@ -1,7 +1,8 @@
 #include "GpsDevice.h"
 #include <Arduino.h>
 
-//#define LOGGING 1 // delete this line to turn logging off
+#define LOGGING 1 // delete this line to turn logging off
+#define LOGRAWGPSSTRINGS 1 // delete this line to stop printing full GPS strings
 
 GpsDevice::~GpsDevice() {
 };
@@ -76,7 +77,7 @@ void GpsDevice::parseReceivedGpsData() {
 
 
     logmsg("Parsed RMC fields.");
-    //logmsg(sentence);
+    logGpsString(sentence);
     rmcReceived = true;
   }
   if (strcmp(field, "$GPGGA") == 0)
@@ -104,7 +105,13 @@ void GpsDevice::parseReceivedGpsData() {
       
 
     logmsg("Parsed GGA fields.");
-    //logmsg(sentence);
+    logGpsString(sentence);
+    ggaReceived = true;
+  }
+  if ( (strcmp(field, "$GPGSV") == 0) || (strcmp(field, "$GPGSA") == 0) )
+  {
+    logmsg("Printing GSV and GSA fields.");
+    logGpsString(sentence);
     ggaReceived = true;
   }
 }
@@ -146,4 +153,10 @@ void GpsDevice::logmsg(String msg) {
   Serial.println(classname + " " + msg);
   #endif
 }
+void GpsDevice::logGpsString(String msg) {
+  #ifdef LOGRAWGPSSTRINGS
+  Serial.println(classname + " RAW: " + msg);
+  #endif
+}
+
 

@@ -50,10 +50,10 @@ private:
   // LABELS
   const char latLabel[4] = {'L', 'A', 'T', '\0'}; 
   const char lonLabel[4] = {'L', 'O', 'N', '\0'}; 
-  const char altLabel[5]     = {'A', 'L', 'T', ':', '\0'}; 
-  const char tmpLabel[5]     = {'T', 'M', 'P', ':', '\0'}; 
-  const char prsLabel[5]     = {'P', 'R', 'S', ':', '\0'}; 
-  const char dirLabel[5]     = {'D', 'I', 'R', ':', '\0'};
+  const char altLabel[5] = {'A', 'L', 'T', ':', '\0'}; 
+  const char tmpLabel[5] = {'T', 'M', 'P', ':', '\0'}; 
+  const char prsLabel[5] = {'P', 'R', 'S', ':', '\0'}; 
+  const char dirLabel[5] = {'D', 'I', 'R', ':', '\0'};
   
   // UNITS
   const char altUnit[3] = {'f', 't', '\0'};
@@ -63,9 +63,9 @@ private:
   // DATA
   char latData[10] = {'0', '0', '0', '0', '0', '.', '0', '0', '0', '\0'}; // ex. 3000.452 N
   char lonData[10] = {'0', '0', '0', '0', '0', '.', '0', '0', '0', '\0'}; // ex. 10000.719 W
-  char altData[7]      = {'0', '0', ',', '0', '0', '0', '\0'};                // ex. 14115 ft.
-  char tmp_data[6]      = {'0', '0', '0', '.', '0', '\0'};                     // ex. 101.2 F
-  char prs_data[7]      = {'0', '0', '0', '.', '0', '0', '\0'};                // ex. 847.18 mb
-  char dir_data[4]      = {'W', 'N', 'W', '\0'};                               // ex, ESE 'east south east'
+  char altData[7]  = {'0', '0', ',', '0', '0', '0', '\0'};                // ex. 14115 ft.
+  char tmpData[6]  = {'0', '0', '0', '.', '0', '\0'};                     // ex. 101.2 F
+  char prs_data[7] = {'0', '0', '0', '.', '0', '0', '\0'};                // ex. 847.18 mb
+  char dir_data[4] = {'W', 'N', 'W', '\0'};                               // ex, ESE 'east south east'
 };
 #endif

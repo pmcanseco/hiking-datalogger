@@ -26,6 +26,7 @@ private:
   void parseReceivedGpsData();
   void getField(char* buffer, int index);
   void logmsg(String msg);
+  void logGpsString(String msg);
 
   // gps field received state
   bool rmcReceived;

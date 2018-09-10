@@ -1,7 +1,7 @@
 #include "EpaperDevice.h"
 #include <Arduino.h>
 
-#define LOGGING 1 // delete this line to turn logging off
+//#define LOGGING 1 // delete this line to turn logging off
 
 #define COLORED     0
 #define UNCOLORED   1
@@ -167,7 +167,7 @@ void EpaperDevice::drawData()
   epd.SetFrameMemory(paint.GetImage(), 60, 38, paint.GetWidth(), paint.GetHeight());
 
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 0, tmp_data, &Font24, COLORED);
+  paint.DrawStringAt(0, 0, tmpData, &Font24, COLORED);
   // y offset, x offset
   epd.SetFrameMemory(paint.GetImage(), 80, 38, paint.GetWidth(), paint.GetHeight());
 
@@ -196,7 +196,7 @@ void EpaperDevice::fetchAlt() {
   logmsg("Fetched altitude of " + String(altData) + " ft from gps.");
 }
 void EpaperDevice::fetchTmp() {
-  
+  String("101.8").toCharArray(tmpData, 6);  
 }
 void EpaperDevice::fetchPrs() {
   

@@ -3,11 +3,13 @@
 #include <epdpaint.h>
 #include "GpsDevice.h"
 #include "EpaperDevice.h"
+#include "BMP180Device.h"
 
 String classname = "[Main        ]";
 
 GpsDevice* gpsDevice;
 EpaperDevice* epaperDevice;
+BMP180Device* bmp180Device;
 
 void logmsg(String msg) 
 {
@@ -21,9 +23,10 @@ void setup() {
   logmsg("HIKING DATA LOGGER");
    
   gpsDevice = new GpsDevice();
-  epaperDevice = new EpaperDevice(*gpsDevice);
+  //epaperDevice = new EpaperDevice(*gpsDevice);
+  bmp180Device = new BMP180Device();
 
-  epaperDevice->init();
+  //epaperDevice->init();
   
   logmsg("setup complete.");
 }
@@ -31,12 +34,15 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  gpsDevice->getRawGpsDataFromSerial();
+  //gpsDevice->getRawGpsDataFromSerial();
 
-  epaperDevice->fetchLon();
-  epaperDevice->fetchLat();
-  epaperDevice->fetchAlt();
-  epaperDevice->drawData();
+  //epaperDevice->fetchLon();
+  //epaperDevice->fetchLat();
+  //epaperDevice->fetchAlt();
+  //epaperDevice->fetchTmp();
+  //epaperDevice->drawData();
+
+  bmp180Device->getData();
 
   delay(1000);
 }
