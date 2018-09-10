@@ -1,14 +1,15 @@
 #include "EpaperDevice.h"
 #include <Arduino.h>
 
-//#define LOGGING 1 // delete this line to turn logging off
+#define LOGGING 1 // delete this line to turn logging off
 
 #define COLORED     0
 #define UNCOLORED   1
 
-EpaperDevice::EpaperDevice(GpsDevice& gpsDevice) :
+EpaperDevice::EpaperDevice(GpsDevice& gpsDevice, BMP180Device& bmp180Device) :
   paint(image, 0, 0),
-  gpsDevice(gpsDevice)
+  gpsDevice(gpsDevice),
+  bmp180Device(bmp180Device)
 { }
 EpaperDevice::~EpaperDevice()
 { }
@@ -172,7 +173,7 @@ void EpaperDevice::drawData()
   epd.SetFrameMemory(paint.GetImage(), 80, 38, paint.GetWidth(), paint.GetHeight());
 
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 0, prs_data, &Font24, COLORED);
+  paint.DrawStringAt(0, 0, prsData, &Font24, COLORED);
   // y offset, x offset
   epd.SetFrameMemory(paint.GetImage(), 110, 38, paint.GetWidth(), paint.GetHeight());
 
@@ -192,14 +193,19 @@ void EpaperDevice::fetchLon() {
   logmsg("Fetched longitude of " + String(lonData) + " from gps.");
 }
 void EpaperDevice::fetchAlt() {
-  gpsDevice.getAltitudeFeet().toCharArray(altData, 6);
-  logmsg("Fetched altitude of " + String(altData) + " ft from gps.");
+  //gpsDevice.getAltitudeFeet().toCharArray(altData, 6);
+  //logmsg("Fetched altitude of " + String(altData) + " ft from gps.");
+
+  bmp180Device.getDisplayableAltitudeFt().toCharArray(altData, 6);
+  logmsg("Fetched altitude of " + String(altData) + " ft from bmp180.");
 }
 void EpaperDevice::fetchTmp() {
-  String("101.8").toCharArray(tmpData, 6);  
+  bmp180Device.getDisplayableTemperatureF().toCharArray(tmpData, 5);  
+  logmsg("Fetched temperature of " + String(tmpData) + "F from from bmp180.");
 }
 void EpaperDevice::fetchPrs() {
-  
+  bmp180Device.getDisplayablePressureMb().toCharArray(prsData, 7);  
+  logmsg("Fetched pressure of " + String(prsData) + "mb from from bmp180.");
 }
 void EpaperDevice::fetchDir() {
   

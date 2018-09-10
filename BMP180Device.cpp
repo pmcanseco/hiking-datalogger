@@ -3,7 +3,11 @@
 
 #define LOGGING 1 // delete this line to turn logging off
 
-BMP180Device::BMP180Device()
+BMP180Device::BMP180Device() :
+  baselinePressure(0.0),
+  altitudeMeters(0.0),
+  pressureMb(0.0),
+  temperatureC(0.0)
 {
   if (sensor.begin())
   {
@@ -30,7 +34,7 @@ void BMP180Device::logmsg(String msg)
 double BMP180Device::getPressure()
 {
   char status;
-  double P,p0,a;
+  double P,p0;
 
   // You must first get a temperature measurement to perform a pressure reading.
   
@@ -95,20 +99,28 @@ void BMP180Device::getData()
 
   // Show the relative altitude difference between
   // the new reading and the baseline reading:
-  altitudeMeters = sensor.altitude(pressureMb,baselinePressure);
-  
-  logmsg("relative altitude:  " + String(altitudeMeters, 1) + " meters,   " + String(altitudeMeters*3.28084,0) + " feet.");
+  double relativeAltitudeMeters = sensor.altitude(pressureMb,baselinePressure);
+  altitudeMeters = sensor.altitude(pressureMb, CONST_AVG_PRS_MBAR_AT_SEA_LEVEL);
+
+  logmsg("relative altitude:  " + String(relativeAltitudeMeters, 1) + " meters,   " + String(relativeAltitudeMeters*3.28084,0) + " feet.");
+  logmsg("absolute altitude:  " + String(altitudeMeters, 1) + " meters,   " + String(altitudeMeters*3.28084,0) + " feet.");
 }
 String BMP180Device::getDisplayablePressureMb()
 {
-  return String(pressureMb, 2);
+  String retval = String(pressureMb, 2);
+  //logmsg("returning prs " + retval);
+  return retval;
 }
 String BMP180Device::getDisplayableTemperatureF()
 {
-  return String((9.0/5.0)*temperatureC+32.0, 1);
+  String retval = String((9.0/5.0)*temperatureC+32.0, 2);
+  //logmsg("returning tmp " + retval);
+  return retval;
 }
 String BMP180Device::getDisplayableAltitudeFt()
 {
-  
+  String retval = String(altitudeMeters*3.28084, 0);
+  //logmsg("returning alt " + retval);
+  return retval;
 }
 

@@ -23,10 +23,11 @@ void setup() {
   logmsg("HIKING DATA LOGGER");
    
   gpsDevice = new GpsDevice();
-  //epaperDevice = new EpaperDevice(*gpsDevice);
   bmp180Device = new BMP180Device();
 
-  //epaperDevice->init();
+  // initialize me last so all my pointers are ready for when i need them.
+  epaperDevice = new EpaperDevice(*gpsDevice, *bmp180Device);
+  epaperDevice->init();
   
   logmsg("setup complete.");
 }
@@ -34,15 +35,15 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  //gpsDevice->getRawGpsDataFromSerial();
-
-  //epaperDevice->fetchLon();
-  //epaperDevice->fetchLat();
-  //epaperDevice->fetchAlt();
-  //epaperDevice->fetchTmp();
-  //epaperDevice->drawData();
-
+  gpsDevice->getRawGpsDataFromSerial();
   bmp180Device->getData();
+
+  epaperDevice->fetchLon();
+  epaperDevice->fetchLat();
+  epaperDevice->fetchAlt();
+  epaperDevice->fetchTmp();
+  epaperDevice->fetchPrs();
+  epaperDevice->drawData();
 
   delay(1000);
 }

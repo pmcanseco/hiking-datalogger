@@ -5,11 +5,12 @@
 #include <epd1in54.h>
 #include <epdpaint.h>
 #include "GpsDevice.h"
+#include "BMP180Device.h"
 
 
 class EpaperDevice {
 public:
-  EpaperDevice(GpsDevice& gpsDevice);
+  EpaperDevice(GpsDevice& gpsDevice, BMP180Device& bmp180Device);
   ~EpaperDevice();
   
   void init();
@@ -36,6 +37,7 @@ private:
   const String classname = "[EpaperDevice]";
   void logmsg(String msg);
   GpsDevice& gpsDevice;
+  BMP180Device& bmp180Device;
   
   /**
   * Due to RAM not enough in Arduino UNO, a frame buffer is not allowed.
@@ -65,7 +67,7 @@ private:
   char lonData[10] = {'0', '0', '0', '0', '0', '.', '0', '0', '0', '\0'}; // ex. 10000.719 W
   char altData[7]  = {'0', '0', ',', '0', '0', '0', '\0'};                // ex. 14115 ft.
   char tmpData[6]  = {'0', '0', '0', '.', '0', '\0'};                     // ex. 101.2 F
-  char prs_data[7] = {'0', '0', '0', '.', '0', '0', '\0'};                // ex. 847.18 mb
+  char prsData[7] = {'0', '0', '0', '.', '0', '0', '\0'};                // ex. 847.18 mb
   char dir_data[4] = {'W', 'N', 'W', '\0'};                               // ex, ESE 'east south east'
 };
 #endif

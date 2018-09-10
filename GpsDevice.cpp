@@ -1,8 +1,8 @@
 #include "GpsDevice.h"
 #include <Arduino.h>
 
-#define LOGGING 1 // delete this line to turn logging off
-#define LOGRAWGPSSTRINGS 1 // delete this line to stop printing full GPS strings
+//#define LOGGING 1 // delete this line to turn logging off
+//#define LOGRAWGPSSTRINGS 1 // delete this line to stop printing full GPS strings
 
 GpsDevice::~GpsDevice() {
 };
@@ -137,9 +137,17 @@ void GpsDevice::getField(char* buffer, int index)
   buffer[fieldPos] = '\0';
 } 
 String GpsDevice::getLatitude() {
+  if(!haveGpsFix)
+  {
+    return " NOGPS";
+  }
   return String(lat, 4);
 }
 String GpsDevice::getLongitude() {
+  if(!haveGpsFix)
+  {
+    return " NOGPS";
+  }
   return String(lon, 4);
 }
 String GpsDevice::getAltitudeFeet() {

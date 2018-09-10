@@ -28,6 +28,9 @@
  *  Uno, Redboard, Pro:        A4   A5    
  *  Mega2560, Due:             20   21    
  *  Leonardo:                   2    3
+ *  
+ *  
+ *  ACCURACY NOTES: Altitude measurement has a noise of around 3.33ft.
  */
 
 class BMP180Device {
@@ -42,6 +45,7 @@ public:
  
 private:
   const String classname = "[BMP180Device]";
+  const double CONST_AVG_PRS_MBAR_AT_SEA_LEVEL = 1013.25; //mbar (hPa)
   
   SFE_BMP180 sensor;
   double baselinePressure;
