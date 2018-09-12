@@ -1,8 +1,6 @@
 # hiking-datalogger
 The code for an Arduino-based device that records GPS and Environmental Data to an SD card over time.
 
-![picture](https://i.imgur.com/u26nQ94.jpg)
-
 ## Wiring
 This project currently runs on an Arduino Mega 2560. These wiring instructions are intended for that board.
 ```
