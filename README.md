@@ -25,3 +25,5 @@ to handle it and the board will freeze. Either use 3v3
 directly from a battery or some other more capable 3.3V 
 DC power supply.
 ```
+
+![Picture](https://i.imgur.com/vMQnReR.png)
